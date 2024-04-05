@@ -1,0 +1,27 @@
+<!-- show_books.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Books</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Books List</h1>
+        {% if books %}
+            <ul class="list-group">
+                {% for book in books %}
+                    <li class="list-group-item">{{ book.title }} - {{ book.author }} ({{ book.year }})</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No books found.</p>
+        {% endif %}
+        <!-- Add button to navigate back to dashboard -->
+        <a href="/dashboard" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</body>
+</html>

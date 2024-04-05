@@ -25,3 +25,11 @@ class Database:
 
     def get_user_collection(self, username):
         return self.db[username]
+    
+    def update_book(self, username, book_id, updated_data):
+        user_collection = self.db[f'user_{username}']
+        user_collection.update_one({'_id': ObjectId(book_id)}, {'$set': updated_data})
+
+    def get_books(self, username):
+        user_collection = self.db[f'user_{username}']
+        return list(user_collection.find())

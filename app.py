@@ -76,10 +76,13 @@ def add_book():
         user_collection = user_db[f'user_{username}']
         book = {"title": title, "author": author, "year": year}
         user_collection.insert_one(book)
-        return 'Data added successfully!'
+
+        # Redirect the user back to the dashboard
+        return redirect(url_for('dashboard'))
     elif request.method == 'GET':
         # Render the form to add a book
         return render_template('add_book.html')
+
 
 @app.route('/delete', methods=['GET', 'POST'])
 def delete_books():
@@ -103,6 +106,52 @@ def delete_books():
         return render_template('delete_books.html', books=books)
     else:
         return render_template('delete_books.html', message="No books found in your collection.")
+
+@app.route('/edit', methods=['GET', 'POST'])
+def edit_books():
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+
+    user_db = client['books']
+    user_collection = user_db[f'user_{username}']
+
+    if request.method == 'POST':
+        selected_book_title = request.form.get('selected_book')
+        new_title = request.form.get('title')
+        new_author = request.form.get('author')
+        new_year = request.form.get('year')
+
+        # Update the selected book in the database with the new values
+        user_collection.update_one(
+            {'title': selected_book_title},
+            {'$set': {'title': new_title, 'author': new_author, 'year': new_year}}
+        )
+
+        # Redirect the user back to the dashboard page
+        return redirect(url_for('dashboard'))
+
+    # Retrieve all books from the collection
+    books = list(user_collection.find())
+
+    return render_template('edit_book.html', books=books)
+
+
+
+@app.route('/show_books')
+def show_books():
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+
+    # Retrieve all books from the collection
+    books = db.get_books(username)
+
+    if not books:
+        return render_template('show_books.html', message="No books found in your collection.")
+
+    return render_template('show_books.html', books=books)
+
 
 
 @app.teardown_appcontext
