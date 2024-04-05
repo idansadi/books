@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Web App</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Welcome to Test Web App</h1>
+    
+    <!-- Login Form -->
+    {% include 'login.html' %}
+
+    <div id="addDataSection" style="display: none;">
+        <h2>Add Data</h2>
+        <form id="addForm" method="POST" action="/add">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br>
+    
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required><br>
+    
+            <label for="year">Year:</label>
+            <input type="text" id="year" name="year" required><br>
+    
+            <button type="submit">Add</button>
+        </form>
+    
+        <h2>Added Data:</h2>
+        <ul id="dataList">
+        </ul>
+    </div>
+    
+    <!-- Button to go to Book Collection -->
+    <form action="/dashboard" method="GET">
+        <button type="submit">Go to Book Collection</button>
+    </form>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const addDataSection = document.getElementById('addDataSection');
+        const form = document.getElementById('addForm');
+        const dataList = document.getElementById('dataList');
+
+        // Event listener for login form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // You can send a request to the server to authenticate the user
+            // and create a unique collection based on the username if authentication is successful.
+            // For simplicity, let's assume authentication is always successful.
+            
+            // Show the add data section after successful login
+            addDataSection.style.display = 'block';
+        });
+
+        // Event listener for add data form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const dataInput = document.getElementById('dataInput').value;
+            const response = await fetch('/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: dataInput })
+            });
+
+            const result = await response.json();
+            console.log(result);
+
+            // Add the added data to the list
+            const listItem = document.createElement('li');
+            listItem.textContent = dataInput;
+            dataList.appendChild(listItem);
+
+            // Clear input field
+            document.getElementById('dataInput').value = '';
+        });
+
+        // Fetch data from server and display on page load
+        window.onload = async () => {
+            const response = await fetch('/show_data');
+            const data = await response.json();
+
+            data.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item.data; // Assuming your document structure has a 'data' field
+                dataList.appendChild(listItem);
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!-- book_collection.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Collection</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Book Collection of {{ username }}</h1>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} by {{ book.author }}</li>
+        {% endfor %}
+    </ul>
+    <!-- Add book form -->
+    <form action="{{ url_for('book_collection') }}" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required><br>
+        <button type="submit">Add Book</button>
+    </form>
+    <!-- Delete book form -->
+    <form action="{{ url_for('book_collection') }}" method="post">
+        <label for="delete_id">Enter Book ID to Delete:</label>
+        <input type="text" id="delete_id" name="delete_id" required><br>
+        <button type="submit">Delete Book</button>
+    </form>
+</body>
+</html>
