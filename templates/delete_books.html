@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>Delete Books</h1>
-    {% if books %}
-        <form action="/delete" method="POST">
-            {% for book in books %}
-                <input type="checkbox" name="selected_books" value="{{ book.title }}">{{ book.title }} by {{ book.author }} ({{ book.year }})<br>
-            {% endfor %}
-            <button type="submit">Delete Selected Books</button>
-        </form>
-    {% else %}
-        <p>{{ message }}</p>
-    {% endif %}
+    <h1 class="title">Delete Books</h1>
+    <div class="login-container">
+        {% if books %}
+            <form action="/delete" method="POST">
+                {% for book in books %}
+                    <input type="checkbox" name="selected_books" value="{{ book.title }}">{{ book.title }} by {{ book.author }} ({{ book.year }})<br>
+                {% endfor %}
+                <button type="submit">Delete Selected Books</button>
+            </form>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </div>    
 </body>
 </html>

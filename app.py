@@ -107,6 +107,7 @@ def delete_books():
     else:
         return render_template('delete_books.html', message="No books found in your collection.")
 
+
 @app.route('/edit', methods=['GET', 'POST'])
 def edit_books():
     username = session.get('username')
@@ -151,7 +152,6 @@ def show_books():
         return render_template('show_books.html', message="No books found in your collection.")
 
     return render_template('show_books.html', books=books)
-
 
 
 @app.teardown_appcontext

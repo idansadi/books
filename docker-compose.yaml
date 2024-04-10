@@ -14,3 +14,16 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: "mongodb://mongodb:27017/books"
+
+volumes:
+  mongo_data:
+

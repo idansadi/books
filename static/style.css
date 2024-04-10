@@ -7,29 +7,42 @@
     box-sizing: border-box;
 }
 
-/* Body styles */
 body {
-    background: #222;
-    color: #fff;
+    background-image: url('https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents the background image from repeating */
+    background-position: center top 0.01px; /* Centers the image and moves it down by 50 pixels */
+    color: #ffffff;
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
 }
 
-/* Main content styles */
+
+
+
 .main-content {
-    margin: 5em auto;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
     text-transform: uppercase;
+    position: absolute;
+    top: 200%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 h1 {
-    width: 100%;
-    margin: 0 auto 1.5em;
-    font-size: 30px;
+    margin-top: 80px; /* Adjust the top margin as needed */
+    margin-left: 500px; /* Adjust the left margin as needed */
+    font-size: 36px; /* Adjust the font size as needed */
+    font-family: "Copperplate", fantasy; /* Use Copperplate font */
+    font-weight: bold; /* Make the text more prominent */
+    color: #272727;
 }
+
+
 
 h1 small {
     text-transform: none;
@@ -43,8 +56,8 @@ h1 small {
 .moleskine-wrapper {
     max-width: calc(50% - 20px); /* Adjust the maximum width as needed */
     min-width: 10em;
-    display: inline-block; /* Display the wrappers inline */
-    margin: 0 10px; /* Add margin between the wrappers */
+    display: inline-block;
+    margin: 70px 40px; /* Adjust margins as needed */
 }
 
 
@@ -86,6 +99,17 @@ h1 small {
 .moleskine-notebook.red .notebook-cover {
     background: #cc4b48;
 }
+
+/* Apply yellow color for "Edit Book" button */
+.moleskine-notebook.yellow .notebook-cover {
+    background: #f3d23b;
+}
+
+/* Apply green color for "Show Books" button */
+.moleskine-notebook.green .notebook-cover {
+    background: #4caf50;
+}
+
 
 .notebook-cover:before {
     content: "";
@@ -187,3 +211,181 @@ footer a:hover {
     display: inline-block;
     font-size: 20px;
 }
+
+.login-container {
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: 35px auto; /* Center the container */
+    padding: 20px; /* Add some padding */
+    border: none; /* Remove border */
+    border-radius: 10px; /* Add border radius */
+    background-color: rgba(202, 202, 202, 0.24); /* Fill the login block with white color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
+    margin-left: 500px; /* Adjust the left margin */
+}
+
+/* Updated CSS to move the title to the left and subtitle slightly to the right */
+.title {
+    text-align: left;
+    font-family: "Copperplate", fantasy; /* Use Copperplate font */
+    font-weight: bold; /* Make the text more prominent */
+    margin-bottom: 20px;
+    color: #272727;
+    margin-left: 400px;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-family: "Copperplate", fantasy; /* Use Copperplate font */
+    font-weight: bold; /* Make the text more prominent */
+    color: #272727;
+    margin-bottom: 20px;
+    text-align: right; /* Align subtitle to the right */
+    margin-right: 630px; /* Adjust margin to move it slightly to the right */
+}
+
+
+/* Style the form elements as needed */
+.login-container label,
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+    display: block;
+    border: none; /* Remove border */
+    margin-bottom: 10px; /* Adjust vertical spacing */
+    padding: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; /* Make the text more prominent */
+    color: rgb(94, 94, 94); /* Change text color */
+    width: 100%; /* Make the input boxes expand to fill the container */
+}
+.login-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #45a049;
+}
+
+/* Style the form elements as needed */
+form {
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: 35px auto; /* Center the form */
+    padding: 20px; /* Add some padding */
+    border: none; /* Remove border */
+    border-radius: 10px; /* Add border radius */
+    background-color: rgba(202, 202, 202, 0.24); /* Fill the form with white color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px; /* Adjust vertical spacing */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; /* Make the text more prominent */
+    color: rgb(94, 94, 94); /* Change text color */
+}
+
+form input[type="text"],
+form input[type="password"] {
+    display: block;
+    padding: 10px;
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border radius */
+    margin-bottom: 10px; /* Adjust vertical spacing */
+    width: calc(100% - 20px); /* Make the input boxes expand to fill the container */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; /* Make the text more prominent */
+    color: rgb(94, 94, 94); /* Change text color */
+}
+
+form button {
+    display: block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: calc(100% - 20px); /* Make the button expand to fill the container */
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Updated CSS to style the delete page */
+/* Style the form elements as needed */
+.delete-container label,
+.delete-container input[type="checkbox"],
+.delete-container button {
+    display: block;
+    margin-bottom: 10px; /* Adjust vertical spacing */
+    padding: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; /* Make the text more prominent */
+    color: rgb(94, 94, 94); /* Change text color */
+    width: 100%; /* Make the input boxes expand to fill the container */
+}
+
+.delete-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-container button:hover {
+    background-color: #45a049;
+}
+
+/* Adjustments for the Delete Books page */
+.delete-container {
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: 35px auto; /* Center the container */
+    padding: 20px; /* Add some padding */
+    border: none; /* Remove border */
+    border-radius: 10px; /* Add border radius */
+    background-color: rgba(202, 202, 202, 0.24); /* Fill the container with white color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
+}
+
+/* Adjust the form layout */
+.delete-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style the checkbox and label to display inline */
+.delete-container input[type="checkbox"],
+.delete-container label {
+    display: inline;
+    margin-right: 20px; /* Adjust spacing between checkbox and label */
+}
+
+.other-container {
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: 35px auto; /* Center the container */
+    padding: 20px; /* Add some padding */
+    border: none; /* Remove border */
+    border-radius: 10px; /* Add border radius */
+    background-color: rgba(202, 202, 202, 0.24); /* Fill the container with white color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
+}
+
+.title {
+    text-align: center; /* Center the title */
+    margin-top: 0; /* Remove default margin */
+}
+
+.book-container {
+    margin-bottom: 15px; /* Add space between each book */
+}
+
+
