@@ -32,7 +32,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE}:${TAG} ."
+                    sh "docker build -t ${DOCKER_IMAGE}:${TAG} -f Dockerfile ."
                 }
             }
         }
@@ -70,7 +70,7 @@ pipeline {
                     } else {
                         body = ''  // If there's no body, set it to an empty string
                     }
-                    
+
                     def owner = 'idansadi'
                     def repo = 'books'
                     def apiUrl = "https://api.github.com/repos/${owner}/${repo}/pulls"
