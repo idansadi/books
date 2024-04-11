@@ -14,6 +14,14 @@ pipeline {
     }
 
     stages {
+        stage('Configure Git') {
+            steps {
+                script {
+                    sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/books_dev'
+                }
+            }
+        }
+
         stage('Checkout Code') {
             steps {
                 checkout scm
