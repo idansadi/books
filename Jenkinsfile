@@ -65,7 +65,7 @@ pipeline {
                     def latestCommitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
                     def messageLines = latestCommitMessage.split('\n')
                     title = messageLines[0]
-                    body = messageLines.tail().join('\n')
+                    body = messageLines.drop(1).join('\n') // Exclude the first line (title) and join the rest as body
 
                     def owner = 'idansadi'
                     def repo = 'books'
@@ -98,7 +98,7 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    sh 'docker push ${DOCKER_IMAGE}:${TAG}'
+                    sh "docker push ${DOCKER_IMAGE}:${TAG}"
                 }
             }
         }
