@@ -65,7 +65,8 @@ pipeline {
                     def latestCommitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
                     def messageLines = latestCommitMessage.split('\n')
                     title = messageLines[0]
-                    body = messageLines.drop(1).join('\n') // Exclude the first line (title) and join the rest as body
+                    messageLines = messageLines[1..-1] // Remove the first line (title)
+                    body = messageLines.join('\n')
 
                     def owner = 'idansadi'
                     def repo = 'books'
