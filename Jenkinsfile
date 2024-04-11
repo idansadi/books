@@ -10,8 +10,8 @@ pipeline {
     environment {
         TAG = 'latest'
         MONGO_URI = 'mongodb://mongodb:27017/books'
-        DOCKER_REGISTRY = 'your-docker-registry-url' // Replace with your Docker Hub registry URL
-        DOCKER_IMAGE = 'your-docker-image-name' // Replace with your Docker image name
+        DOCKER_REGISTRY = 'docker.io' // Docker Hub registry URL
+        DOCKER_IMAGE = 'idansadi/books' // Docker image name
     }
 
     stages {
