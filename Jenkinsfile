@@ -10,11 +10,19 @@ pipeline {
     environment {
         TAG = 'latest'
         MONGO_URI = 'mongodb://mongodb:27017/books'
-        DOCKER_REGISTRY = 'https://hub.docker.com' // Docker Hub registry URL
         DOCKER_IMAGE = 'idansadi/books' // Docker image name
+        GITHUB_TOKEN = credentials('github-token')
     }
 
     stages {
+        stage('Configure Git') {
+            steps {
+                script {
+                    sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/books_dev'
+                }
+            }
+        }
+
         stage('Checkout Code') {
             steps {
                 checkout scm
@@ -24,7 +32,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${TAG}")
+                    sh "docker build -t ${DOCKER_IMAGE}:${TAG} ."
                 }
             }
         }
@@ -50,18 +58,22 @@ pipeline {
                 script {
                     def headBranch = env.BRANCH_NAME
                     def baseBranch = 'main'
+                    def title
+                    def body
 
                     // Extracting title and description from the latest commit message
                     def latestCommitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-                    def title = latestCommitMessage.split('\n')[0]
-                    def body = latestCommitMessage - title
-
-                    def authToken = env.GITHUB_TOKEN
-                    def owner = 'your-username'
-                    def repo = 'your-repo'
-
+                    def messageLines = latestCommitMessage.split('\n')
+                    title = messageLines[0]
+                    if (messageLines.size() > 1) {
+                        body = messageLines.tail().join('\n')
+                    } else {
+                        body = ''  // If there's no body, set it to an empty string
+                    }
+                    
+                    def owner = 'idansadi'
+                    def repo = 'books'
                     def apiUrl = "https://api.github.com/repos/${owner}/${repo}/pulls"
-
                     def payload = """
                     {
                         "title": "${title}",
@@ -71,7 +83,10 @@ pipeline {
                     }
                     """
 
-                    sh "curl -X POST -H 'Authorization: token ${authToken}' -d '${payload}' ${apiUrl}"
+                    sh """
+                    curl -X POST -H 'Authorization: token ${env.GITHUB_TOKEN}' \\
+                    -d '${payload}' ${apiUrl}
+                    """
                 }
             }
         }
@@ -87,13 +102,9 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry("${DOCKER_REGISTRY}", 'dockerhub-credentials') {
-                        def dockerImage = docker.image("${DOCKER_IMAGE}:${TAG}")
-                        dockerImage.push()
-                    }
+                    sh "docker push ${DOCKER_IMAGE}:${TAG}"
                 }
             }
         }
     }
 }
-
