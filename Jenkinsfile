@@ -10,7 +10,6 @@ pipeline {
     environment {
         TAG = 'latest'
         MONGO_URI = 'mongodb://mongodb:27017/books'
-        DOCKER_REGISTRY = 'https://hub.docker.com' // Docker Hub registry URL
         DOCKER_IMAGE = 'idansadi/books' // Docker image name
     }
 
@@ -24,7 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${TAG}")
+                    sh "docker build -t ${DOCKER_IMAGE}:${TAG} ."
                 }
             }
         }
@@ -87,13 +86,9 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry("${DOCKER_REGISTRY}", 'dockerhub-credentials') {
-                        def dockerImage = docker.image("${DOCKER_IMAGE}:${TAG}")
-                        dockerImage.push()
-                    }
+                    sh 'docker push ${DOCKER_IMAGE}:${TAG}'
                 }
             }
         }
     }
 }
-
