@@ -24,7 +24,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${TAG}")
+                    def dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${TAG}")
                 }
             }
         }
@@ -88,7 +88,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("${DOCKER_REGISTRY}", 'dockerhub-credentials') {
-                        docker.image("${DOCKER_IMAGE}:${TAG}").push()
+                        def dockerImage = docker.image("${DOCKER_IMAGE}:${TAG}")
+                        dockerImage.push()
                     }
                 }
             }
