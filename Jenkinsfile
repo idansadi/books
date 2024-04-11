@@ -65,9 +65,12 @@ pipeline {
                     def latestCommitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
                     def messageLines = latestCommitMessage.split('\n')
                     title = messageLines[0]
-                    messageLines = messageLines[1..-1] // Remove the first line (title)
-                    body = messageLines.join('\n')
-
+                    if (messageLines.size() > 1) {
+                        body = messageLines.tail().join('\n')
+                    } else {
+                        body = ''  // If there's no body, set it to an empty string
+                    }
+                    
                     def owner = 'idansadi'
                     def repo = 'books'
                     def apiUrl = "https://api.github.com/repos/${owner}/${repo}/pulls"
