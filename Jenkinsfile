@@ -11,6 +11,7 @@ pipeline {
         TAG = 'latest'
         MONGO_URI = 'mongodb://mongodb:27017/books'
         DOCKER_IMAGE = 'idansadi/books' // Docker image name
+        GITHUB_TOKEN = credentials('github-token')
     }
 
     stages {
@@ -57,18 +58,18 @@ pipeline {
                 script {
                     def headBranch = env.BRANCH_NAME
                     def baseBranch = 'main'
+                    def title
+                    def body
 
                     // Extracting title and description from the latest commit message
                     def latestCommitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-                    def title = latestCommitMessage.split('\n')[0]
-                    def body = latestCommitMessage - title
+                    def messageLines = latestCommitMessage.split('\n')
+                    title = messageLines[0]
+                    body = messageLines.tail().join('\n')
 
-                    def authToken = env.GITHUB_TOKEN
-                    def owner = 'your-username'
-                    def repo = 'your-repo'
-
+                    def owner = 'idansadi'
+                    def repo = 'books'
                     def apiUrl = "https://api.github.com/repos/${owner}/${repo}/pulls"
-
                     def payload = """
                     {
                         "title": "${title}",
@@ -78,7 +79,10 @@ pipeline {
                     }
                     """
 
-                    sh "curl -X POST -H 'Authorization: token ${authToken}' -d '${payload}' ${apiUrl}"
+                    sh """
+                    curl -X POST -H 'Authorization: token ${env.GITHUB_TOKEN}' \\
+                    -d '${payload}' ${apiUrl}
+                    """
                 }
             }
         }
