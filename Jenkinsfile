@@ -104,6 +104,8 @@ pipeline {
         }
 
         stage('Push Docker Image to Docker Hub') {
+            when {
+                    branch 'main'
             steps {
                 script {
                     sh "docker push ${DOCKER_IMAGE}:${TAG}"
