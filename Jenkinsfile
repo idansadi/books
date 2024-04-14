@@ -92,10 +92,14 @@ pipeline {
         }
 
         stage('Login to Docker Hub') {
+            when {
+                    branch 'main'
+                }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
                 }
+                echo 'Login Completed'
             }
         }
 
