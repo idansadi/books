@@ -9,6 +9,8 @@ services:
       - "5000:5000"
     depends_on:
       - mongodb
+    environment:
+      MONGO_URI: "mongodb://mongodb:27017/books"
 
   mongodb:
     image: mongo
