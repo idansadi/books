@@ -10,7 +10,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
   environment:
-    MONGO_URI: "mongodb://root:YLrWvoQiH2@mongodb:27017/books"
+    MONGO_URI: "mongodb://mongodb:27017/books"
 
 
 imagePullSecrets: []
