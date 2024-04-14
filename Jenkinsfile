@@ -93,8 +93,8 @@ pipeline {
 
         stage('Login to Docker Hub') {
             when {
-                    branch 'main'
-                }
+                branch 'main'
+            }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
@@ -105,7 +105,8 @@ pipeline {
 
         stage('Push Docker Image to Docker Hub') {
             when {
-                    branch 'main'
+                branch 'main'
+            }
             steps {
                 script {
                     sh "docker push ${DOCKER_IMAGE}:${TAG}"
