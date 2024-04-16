@@ -20,7 +20,7 @@ COPY . .
 EXPOSE 5000
 
 # Define environment variable for MongoDB URI (if needed)
-ENV MONGO_URI mongodb://localhost:27017/books
+ENV MONGO_URI mongodb://mongodb:27017/books
 
 # Command to run the tests
 CMD ["pytest"]
