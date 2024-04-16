@@ -9,7 +9,7 @@ pipeline {
     }
     environment {
         TAG = 'latest'
-        MONGO_URI = 'mongodb://mongodb:27017/books'
+        MONGO_URI = 'mongodb://localhost:27017/books'
         DOCKER_IMAGE = 'idansadi/books' // Docker image name
         GITHUB_TOKEN = credentials('github-token')
     }
