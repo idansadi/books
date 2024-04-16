@@ -52,7 +52,7 @@ spec:
           {{- end }}
           env:
           - name: MONGODB_URI
-            value: "mongodb:mongodb:27017/books"
+            value: "mongodb://root:OlqaJBCTvb@mongodb.mongodb.svc.cluster.local:27017/books"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
