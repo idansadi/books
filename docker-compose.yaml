@@ -10,12 +10,12 @@ services:
     depends_on:
       - mongodb
     environment:
-      MONGO_URI: "mongodb://mongodb:27017/books"
+      MONGO_URI: "mongodb://mongodb:27018/books"
 
   mongodb:
     image: mongo
     ports:
-      - "27017:27017"
+      - "27018:27017"
 
   test:
     build:
@@ -24,7 +24,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      MONGO_URI: "mongodb://mongodb:27017/books"
+      MONGO_URI: "mongodb://mongodb:27018/books"
 
 volumes:
   mongo_data:
