@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secret key for session management
 
 # Define MongoDB URI
-mongo_uri = os.getenv("MONGO_URI", "mongodb://root:bqoGz0e3lV@mongodb.default.svc.cluster.local:27017/books")
+mongo_uri = os.getenv("MONGO_URI", "mongodb://mongodb.default.svc.cluster.local:27017/books")
 
 client = MongoClient(mongo_uri)
 

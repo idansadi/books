@@ -9,9 +9,6 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
-  environment:
-    MONGO_URI: "mongodb://root:bqoGz0e3lV@mongodb.default.svc.cluster.local:27017/books"
-
 
 imagePullSecrets: []
 nameOverride: ""
@@ -112,3 +109,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+flaskApp:
+  image: my-flask-app-image:tag
+  replicaCount: 1
+  port: 5000
+
+mongodb:
+  host: mongodb
+  port: 27017
