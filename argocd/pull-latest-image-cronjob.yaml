@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: pull-latest-image
+spec:
+  schedule: "*/5 * * * *" # Run every 5 minutes (adjust as needed)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pull-latest-image
+            image: kubectl
+            command: ["kubectl", "set", "image", "deployment/boos-app-books", "boos-app-books=your-image:latest"]
+          restartPolicy: OnFailure
