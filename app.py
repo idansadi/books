@@ -3,9 +3,12 @@ from pymongo import MongoClient
 from bson import ObjectId
 import os
 from db import Database  # Import Database class from db.py
+from prometheus_flask_exporter import PrometheusMetrics
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secret key for session management
+metrics = PrometheusMetrics(app)
 
 # Define MongoDB URI
 mongo_uri = os.getenv("MONGO_URI", "mongodb://mongodb.default.svc.cluster.local:27017/books")
