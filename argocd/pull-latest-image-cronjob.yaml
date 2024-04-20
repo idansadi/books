@@ -10,6 +10,6 @@ spec:
         spec:
           containers:
           - name: pull-latest-image
-            image: kubectl
-            command: ["kubectl", "set", "image", "deployment/boos-app-books", "boos-app-books=your-image:latest"]
+            image: idansadi/books
+            command: ["kubectl", "set", "image", "deployment/boos-app-books", "boos-app-books=idansadi/books:latest"]
           restartPolicy: OnFailure
