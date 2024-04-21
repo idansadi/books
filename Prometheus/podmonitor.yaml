@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: prometheus-pod-monitor
+  namespace: default
+  labels:
+    prometheus: "true"
+spec:
+  selector:
+    matchLabels:
+      prometheus.io/scrape: "true"
+  namespaceSelector:
+    matchNames:
+    - default
+  podMetricsEndpoints:
+    - targetPort: 5000
