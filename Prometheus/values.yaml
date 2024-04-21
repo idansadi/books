@@ -1,40 +1,37 @@
+prometheus:
+  prometheusSpec:
+    # Configuration options for the Prometheus server
+    podMonitorSelector:
+      matchLabels:
+        prometheus: "true"
+
 additionalPrometheusRulesMap:
   rule-name:
     groups:
       - name: project
         rules:
           - alert: LowRunningPodsCount
-            expr: count(kube_pod_status_phase{namespace="default", pod=~"boos-app-books.*", phase="Running"}) < 3
+            expr: count(kube_pod_status_phase{namespace="default", pod=~"books.*", phase="Running"}) < 3
             for: 1m
             labels:
               severity: critical
             annotations:
               summary: "Low number of running pods"
-              description: "The count of running pods in namespace 'default' starting with 'boos-app-books' is below 3."
+              description: "The count of running pods in namespace 'default' starting with 'books' is below 3."
           - alert: HighCpuUsage
-            expr: sum(rate(container_cpu_usage_seconds_total{namespace="default", container!="", pod=~"boos-app-books.*"}[5m])) by (pod) / sum(kube_pod_container_resource_limits_cpu_cores{namespace="default", container!="", pod=~"argocd-mycar-mycar-helm.*"}) by (pod) > 0.2
+            expr: sum(rate(container_cpu_usage_seconds_total{namespace="default", container!="", pod=~"books.*"}[5m])) by (pod) / sum(kube_pod_container_resource_limits_cpu_cores{namespace="default", container!="", pod=~"argocd-mycar-mycar-helm.*"}) by (pod) > 0.2
             for: 1m
             labels:
               severity: critical
             annotations:
               summary: "High CPU usage detected"
-              description: "CPU usage for one or more pods in namespace 'default' starting with 'boos-app-books' is above 80% of its limit."
+              description: "CPU usage for one or more pods in namespace 'default' starting with 'books' is above 80% of its limit."
           - alert: HighMemoryUsage
-            expr: sum(rate(container_memory_usage_bytes{namespace="default", container!="", pod=~"boos-app-books.*"}[5m])) by (pod) / sum(kube_pod_container_resource_limits_memory_bytes{namespace="default", container!="", pod=~"argocd-mycar-mycar-helm.*"}) by (pod) > 0.8
+            expr: sum(rate(container_memory_usage_bytes{namespace="default", container!="", pod=~"books.*"}[5m])) by (pod) / sum(kube_pod_container_resource_limits_memory_bytes{namespace="default", container!="", pod=~"argocd-mycar-mycar-helm.*"}) by (pod) > 0.8
             for: 1m
             labels:
               severity: critical
             annotations:
               summary: "High memory usage detected"
-              description: "Memory usage for one or more pods in namespace 'default' starting with 'boos-app-books' is above 80% of its limit."
-
-serverFiles:
-  prometheus.yml:
-    scrape_configs:
-      - job_name: 'kubernetes-service-endpoints'
-        kubernetes_sd_configs:
-          - role: endpoints
-        namespaces:
-          names:
-            - 'default'
-            - 'observation'
+              description: "Memory usage for one or more pods in namespace 'default' starting with 'books' is above 80% of its limit."
+#
