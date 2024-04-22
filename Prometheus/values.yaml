@@ -5,6 +5,19 @@ prometheus:
       matchLabels:
         prometheus: "true"
 
+  serviceMonitorSelector:
+    matchLabels:
+      release: "prometheus"
+
+serviceMonitors:
+  - name: default-service-monitors
+    selector:
+      matchLabels:
+        prometheus.io/scrape: "true"
+    namespaceSelector:
+      matchNames:
+        - default
+
 additionalPrometheusRulesMap:
   rule-name:
     groups:
@@ -34,4 +47,3 @@ additionalPrometheusRulesMap:
             annotations:
               summary: "High memory usage detected"
               description: "Memory usage for one or more pods in namespace 'default' starting with 'books' is above 80% of its limit."
-#
