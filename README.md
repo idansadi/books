@@ -31,3 +31,50 @@ Screen for editing a book from the inventory. The user can edit the details of t
 ![Screenshot_6](https://github.com/idansadi/books/assets/143510244/105b5cfb-1542-405b-b1cf-64256be8116c)
 
 A screen that shows the user the list of books in his inventory.
+
+
+
+# Tools I worked with
+My project embraces a wide array of technologies and tools to uphold top-notch development standards, continuous integration, and resilient deployment practices. Below is an elaborate breakdown of our technology stack, highlighting our DevOps methodologies.
+
+## Application Development
+Python: is a versatile, high-level programming language known for its simplicity and readability. It offers extensive libraries and frameworks, making it ideal for rapid development, data analysis, and web applications.
+
+![Screenshot_6](https://github.com/idansadi/books/assets/143510244/f3b61258-fece-4eb0-8305-aab7502a43cd)
+
+## Database
+MongoDB: is a popular NoSQL database management system designed for flexibility, scalability, and performance. It stores data in flexible, JSON-like documents, allowing for seamless integration with modern application development stacks and efficient handling of diverse data types.
+
+![Screenshot_5](https://github.com/idansadi/books/assets/143510244/e1452539-0f18-45bd-8e64-a23959eba212)
+
+
+## Continuous Integration and Deployment
+Jenkins: Serving as an open-source automation server, Jenkins empowers developers globally to consistently build, test, and roll out their software. Jenkins orchestrates our CI/CD pipeline, seamlessly integrating with GitHub to streamline our development lifecycle. In this project, Jenkins is utilized with multibranch pipelines to execute various workflows.
+
+![Screenshot_7](https://github.com/idansadi/books/assets/143510244/638ee405-b107-4ee5-8d44-25b46c3b8e56)
+
+## Containerization and Artifact Storage:
+
+Docker simplifies application deployment by containerizing software and its dependencies, ensuring consistency across diverse environments. DockerHub serves as a centralized repository for Docker images, streamlining image storage, sharing, and collaboration. Leveraging Docker and DockerHub enhances development workflows, promoting scalability and efficiency in application deployment and management.
+
+![Screenshot_1](https://github.com/idansadi/books/assets/143510244/aa98ca3a-c3b3-4dbd-930f-5d84e6463a8d)
+
+
+# Deployment:
+
+ArgoCD: a GitOps continuous delivery tool designed for Kubernetes, facilitates automated application deployment across multiple environments. It ensures synchronization between Git repositories and production environments, guaranteeing the latest stable application versions are consistently deployed.
+
+![Screenshot_2](https://github.com/idansadi/books/assets/143510244/2592824e-9098-47c3-b0ae-432908f54f7d)
+
+
+Kubernetes: is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. It provides a resilient infrastructure for running distributed systems, simplifying application deployment and management at scale.
+
+![Screenshot_3](https://github.com/idansadi/books/assets/143510244/b5f42748-66d8-4cf6-9833-0c3f03034882)
+
+## Monitoring
+Prometheus: is an open-source monitoring and alerting toolkit designed for reliability and scalability in modern, cloud-native environments. It collects metrics from monitored targets and stores them efficiently, allowing for real-time querying and alerting based on predefined conditions.
+
+![Screenshot_4](https://github.com/idansadi/books/assets/143510244/607d7689-9fbc-419d-9c0d-b80b9e7fb6ac)
+
+# 
+Every technology and tool within our arsenal has been meticulously chosen to elevate our development workflow, prioritizing efficiency, dependability, and scalability across our application ecosystem. Our DevOps framework seamlessly integrates into every facet of the application lifecycle, spanning from initial development to deployment, continuous monitoring, and iterative updates. This holistic approach cultivates a culture of perpetual refinement, driving continuous improvement and innovation within our organization.
