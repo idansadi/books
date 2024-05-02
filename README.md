@@ -93,9 +93,7 @@ Every technology and tool within our arsenal has been meticulously chosen to ele
 version: '3'
 services:
   web:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: idansadi/books:latest
     ports:
       - "5000:5000"
     depends_on:
