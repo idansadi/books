@@ -1,0 +1,34 @@
+azure-pipeline
+trigger:
+ - main
+ 
+ name: Bagira-agent
+ demands:
+ - Agent.Name -bagira-agent
+
+stages:
+  - stage: Compile project  
+    jobs:
+      - job: Build
+        steps:
+          - script: |
+              python -m pip install --upgrade pip
+
+          - script: |
+              pip install -r requirements.txt
+
+          - script: |
+              python -m compileall .
+          
+          - powershell: |
+              $artifactPath = "$(System.DefaultWorkingDirectory)\compiled_project"
+              $artifactName = "compiled_project.zip"
+              $destination = "C:\IT"
+    
+              Compress-Archive -Path $artifactPath -DestinationPath $artifactName
+              if (-not (Test-Path -Path $destination)) {
+                  New-Item -ItemType Directory -Force -Path $destination
+              }
+              Move-Item -Path $artifactName -Destination $destination
+            displayName: 'Create and copy artifact to C:\IT'
+
